@@ -1,0 +1,128 @@
+make cart_tests 
+clear 1
+./cart_tests 
+clear 1
+make cart_tests 
+clear 1
+make cart_tests 
+./cart_tests 
+gdb ./cart_tests 
+make cart_tests 
+./cart_tests 
+make cart_tests 
+./cart_tests 
+gdb ./cart_tests 
+make cart_tests 
+./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+clear 1
+make cart_tests 
+./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+make cart_tests 
+clear 1
+make cart_tests 
+./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+y
+make cart_tests 
+./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+make cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+cd ..
+cd inlupp1
+make freq
+make freq
+make freq
+make freq_mem_test_16k 
+make freq_mem_test_16k 
+make freq_mem_test_16k 
+gprof ./freq
+0.00      0.05     0.00        8     0.00     0.93  ioopm_resize_ht
+clear 1
+ls
+clear 1
+git branch
+git commit
+git history
+git log
+git log --pretty=oneline
+git log --oneline
+git branch
+make cart_tests 
+make cart_tests 
+clear 1
+./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+gdb ./cart_tests 
+make cart_tests 
+gdb ./cart_tests 
+make cart_tests 
+gdb ./cart_tests 
+make cart_tests 
+gdb ./cart_tests 
+make cart_tests 
+./cart_tests 
+make cart_tests 
+./cart_tests 
+make cart_tests 
+./cart_tests 
+valgrind --leak-check=full ./cart_tests
+==3374== 536 (32 direct, 504 indirect) bytes in 1 blocks are definitely lost in loss record 15 of 15
+clear 1
+make cart_tests 
+valgrind --leak-check=full ./cart_tests
+make cart_tests 
+ls
+rm cart_tests
+make cart_tests 
+./cart_tests 
+clear 1
+valgrind --leak-check=full ./cart_tests
+==3451==    by 0x10985C: main (cart_tests.c:127)
+clear 1
+gdb ./cart_tests 
+make cart_tests 
+./cart_tests 
+valgrind --leak-check=full ./cart_tests
+q
+make cart_tests 
+valgrind --leak-check=full ./cart_tests
+clear 1
+valgrind --leak-check=full ./cart_tests
+make cart_tests 
+make cart_tests 
+rm cart_tests
+make cart_tests 
+make cart_tests 
+make cart_tests 
+rm cart_tests
+make cart_tests 
+make cart_tests 
+clear 1
+make cart_tests 
+clear 1
+make cart_tests 
+collect2: fel: ld returnerade avslutningsstatus 1
+clear 1
+make cart_tests 
+make cart_tests 
+make cart_tests 
+make cart_tests 
+make cart_tests 
+make cart
+make cart_tests 
+make cart_tests 
+./cart_tests 
