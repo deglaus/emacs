@@ -1,5 +1,5 @@
 #+STARTUP: overview
-#+TITLE: Witchmacs
+#+TITLE: GNUMACS
 #+LANGUAGE: en
 #+OPTIONS: num:nil
 The Emacs distribution
