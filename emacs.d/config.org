@@ -2,7 +2,7 @@
 #+TITLE: Witchmacs
 #+LANGUAGE: en
 #+OPTIONS: num:nil
-The cutest Emacs distribution
+The Emacs distribution
 
 [[./gnu.png]]
 * Introduction
@@ -148,6 +148,11 @@ Super - Control - <arrow>
 (set-frame-parameter (selected-frame) 'alpha '(100 100))
 (add-to-list 'default-frame-alist '(alpha 100 100))
 #+END_SRC
+**  Searching
+#+BEGIN_SRC emacs-lisp
+ (global-set-key (kbd "C-s") 'isearch-forward)
+ (define-key isearch-mode-map "\C-s" 'isearch-repeat-forward)
+#+END_SRC
 * =Org= mode
 ** Description
 One of the main selling points of Emacs! no Emacs distribution is complete without sensible and well-defined org-mode defaults
@@ -192,7 +197,7 @@ Eshell cannot handle ncurses programs and in certain interpreters (Python, GHCi)
 ** Aliases
 #+BEGIN_SRC emacs-lisp
   (defalias 'open 'find-file-other-window)
-  (defalias 'clean 'eshell/clear-scrollback)
+  (defalias 'c 'eshell/clear-scrollback)
 #+END_SRC
 ** Custom functions
 *** Open files as root
@@ -320,7 +325,7 @@ The frontend of Witchmacs; without this there'd be no Marisa in your Emacs start
     (dashboard-setup-startup-hook)
     (setq dashboard-items '((recents . 5)))
     (setq dashboard-banner-logo-title "WITCHMACS - A GNU/Emacs distribution!")
-    (setq dashboard-startup-banner "~/.emacs.d/gnu.png")
+    (setq dashboard-startup-banner "~/.emacs.d/gnu2.png")
     (setq dashboard-center-content t)
     (setq dashboard-show-shortcuts nil)
     (setq dashboard-set-init-info t)
@@ -371,9 +376,10 @@ Incredibly useful package; if you are in the middle of a command and don't know 
 When doing C-s to search, you get this very nice and neat mini-buffer that you can traverse with the arrow keys (or C-n and C-p) and then press <RET> to select where you want to go
 *** Code
 #+BEGIN_SRC emacs-lisp
-  (use-package swiper
-	:ensure t
-	:bind ("C-s" . 'swiper))
+    (use-package swiper
+      :ensure t
+      ;;:bind ("C-s" . 'swiper)
+      )
 #+END_SRC
 ** Initialize =evil= mode
 *** Description
@@ -615,28 +621,35 @@ Yasnippet provides useful snippets, nothing to do with Company but still useful 
 Irony is the company backend for C and C++. The rest are custom keybindings for C.
 *** Code
 #+BEGIN_SRC emacs-lisp
-    (use-package company-c-headers
-      :defer nil
-      :ensure t)
+     (use-package company-c-headers
+       :defer nil
+       :ensure t)
 
-    (use-package company-irony
-      :defer nil
-      :ensure t
-      :config
-      (setq company-backends '((company-c-headers
-                                company-dabbrev-code
-                                company-irony))))
-    (use-package irony
-      :defer nil
-      :ensure t
-      :config
-      :hook
-      ((c++-mode c-mode) . irony-mode)
-      ('irony-mode-hook) . 'irony-cdb-autosetup-compile-options)
+     (use-package company-irony
+       :defer nil
+       :ensure t
+       :config
+       (setq company-backends '((company-c-headers
+                                 company-dabbrev-code
+                                 company-irony))))
+     (use-package irony
+       :defer nil
+       :ensure t
+       :config
+       :hook
+       ((c++-mode c-mode) . irony-mode)
+       ('irony-mode-hook) . 'irony-cdb-autosetup-compile-options)
 
-  ;; Binds C-c C-l to compile in C-mode
-      (add-hook 'c-mode-common-hook 
-            (lambda () (define-key c-mode-base-map (kbd "C-c C-l") 'compile)))
+   ;; Binds C-c C-l to compile in C-mode
+       (add-hook 'c-mode-common-hook 
+             (lambda () (define-key c-mode-base-map (kbd "C-c C-l") 'compile)))
+
+;; Binds super right to end of line and super left to beginning of line.
+       (add-hook 'c-mode-common-hook 
+             (lambda () (define-key c-mode-base-map (kbd "<s-right>") 'move-end-of-line)))
+
+  (add-hook 'c-mode-common-hook 
+             (lambda () (define-key c-mode-base-map (kbd "<s-left>") 'move-beginning-of-line)))
 #+END_SRC
 ** Java
 *** Description
