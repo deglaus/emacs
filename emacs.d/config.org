@@ -721,4 +721,21 @@ I use meghanada to provide very neat autocompletion when editing Java files. I u
     (setq meghanada-maven-path "mvn"))
 #+END_SRC
 
+** Web-mode
+*** Description
+Web-mode is autonomous emacs major-mode for editing web templates.
+*** Code
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/web/")
+  (require 'web-mode)
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+#+END_SRC
+
 
