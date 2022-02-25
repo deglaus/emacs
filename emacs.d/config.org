@@ -148,7 +148,7 @@ Super - Control - <arrow>
 (set-frame-parameter (selected-frame) 'alpha '(100 100))
 (add-to-list 'default-frame-alist '(alpha 100 100))
 #+END_SRC
-**  Searching
+** Searching
 #+BEGIN_SRC emacs-lisp
  (global-set-key (kbd "C-s") 'isearch-forward)
  (define-key isearch-mode-map "\C-s" 'isearch-repeat-forward)
@@ -723,7 +723,7 @@ I use meghanada to provide very neat autocompletion when editing Java files. I u
 
 ** Web-mode
 *** Description
-Web-mode is autonomous emacs major-mode for editing web templates.
+Web-mode is an autonomous emacs major-mode for editing web templates.
 *** Code
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/.emacs.d/web/")
@@ -739,3 +739,12 @@ Web-mode is autonomous emacs major-mode for editing web templates.
 #+END_SRC
 
 
+
+** Clojure
+*** Description
+TODO: add
+*** Code
+#+BEGIN_SRC emacs-lisp
+(unless (package-installed-p 'clojure-mode)
+  (package-install 'clojure-mode))
+#+END_SRC
