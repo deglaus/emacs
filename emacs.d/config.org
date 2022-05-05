@@ -738,27 +738,6 @@ TODO: add
 (unless (package-installed-p 'clojure-mode)
   (package-install 'clojure-mode))
 #+END_SRC
-** Erlang
-*** Description
-TODO: add
-*** Installation
-For this to work, erlang needs to be installed on your device.
-The file paths in the code needs to be adjusted to wherever erlang is installed. The name of the tools folder may vary due to a difference in versions of erlang; adjust that too.
-*** Code
-#+BEGIN_SRC emacs-lisp
-  (setq load-path (cons  "/usr/lib/erlang/lib/tools-3.5.2/emacs"
-        load-path))
-        (setq erlang-root-dir "/usr/lib/erlang")
-        (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-  (require 'erlang-start)
-
-
-   ;; Binds C-c C-e to open erlang interpreter in erlang-mode
-       (add-hook 'erlang-mode-hook 
-             (lambda () (define-key erlang-mode-base-map (kbd "C-c C-e") 'run-erlang)))
-#+END_SRC
-
-
 ** Go
 *** Description
 Go is a language developed by Google.

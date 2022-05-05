@@ -64,6 +64,9 @@
 (set-frame-parameter (selected-frame) 'alpha '(100 100))
 (add-to-list 'default-frame-alist '(alpha 100 100))
 
+(global-set-key (kbd "C-s") 'isearch-forward)
+(define-key isearch-mode-map "\C-s" 'isearch-repeat-forward)
+
 (use-package org
   :config
   (add-hook 'org-mode-hook 'org-indent-mode)
@@ -94,7 +97,7 @@
 (setq eshell-highlight-prompt nil)
 
 (defalias 'open 'find-file-other-window)
-(defalias 'clean 'eshell/clear-scrollback)
+(defalias 'c 'eshell/clear-scrollback)
 
 (defun eshell/sudo-open (filename)
   "Open a file as root in Eshell."
@@ -184,8 +187,8 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents . 5)))
-  (setq dashboard-banner-logo-title "WITCHMACS - A GNU/Emacs distribution!")
-  (setq dashboard-startup-banner "~/.emacs.d/ougimacs6.png")
+  (setq dashboard-banner-logo-title "E M A C S")
+  (setq dashboard-startup-banner "~/.emacs.d/gnu2.png")
   (setq dashboard-center-content t)
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-init-info t)
@@ -222,8 +225,9 @@
   (which-key-mode))
 
 (use-package swiper
-      :ensure t
-      :bind ("C-s" . 'swiper))
+  :ensure t
+  ;;:bind ("C-s" . 'swiper)
+  )
 
 (use-package evil
   :ensure t
@@ -366,6 +370,55 @@
 (use-package magit
   :ensure t)
 
+(use-package latex
+    :mode
+    ("\\.tex\\'" . latex-mode)
+    :bind
+    (:map LaTeX-mode-map
+          ("M-<delete>" . TeX-remove-macro)
+          ("C-c C-r" . reftex-query-replace-document)
+          ("C-c C-g" . reftex-grep-document))
+    :init
+    ;; A function to delete the current macro in AUCTeX.
+    ;; Note: keybinds won't be added to TeX-mode-hook if not kept at the end of the AUCTeX setup!
+    (defun TeX-remove-macro ()
+        "Remove current macro and return TRUE, If no macro at point, return Nil."
+        (interactive)
+        (when (TeX-current-macro)
+            (let ((bounds (TeX-find-macro-boundaries))
+                  (brace  (save-excursion
+                              (goto-char (1- (TeX-find-macro-end)))
+                              (TeX-find-opening-brace))))
+                (delete-region (1- (cdr bounds)) (cdr bounds))
+                (delete-region (car bounds) (1+ brace)))
+            t))
+    :config
+    (add-to-list 'TeX-command-list
+                 '("Makeglossaries" "makeglossaries %s" TeX-run-command nil
+                   (latex-mode)
+                   :help "Run makeglossaries script, which will choose xindy or makeindex") t)
+
+    (setq-default TeX-master nil ; by each new fie AUCTEX will ask for a master fie.
+                  TeX-PDF-mode t
+                  TeX-engine 'xetex)     ; optional
+
+    (setq TeX-auto-save t
+          TeX-save-query nil       ; don't prompt for saving the .tex file
+          TeX-parse-self t
+          TeX-show-compilation nil         ; if `t`, automatically shows compilation log
+          LaTeX-babel-hyphen nil ; Disable language-specific hyphen insertion.
+          ;; `"` expands into csquotes macros (for this to work, babel pkg must be loaded after csquotes pkg).
+          LaTeX-csquotes-close-quote "}"
+          LaTeX-csquotes-open-quote "\\enquote{"
+          TeX-file-extensions '("Rnw" "rnw" "Snw" "snw" "tex" "sty" "cls" "ltx" "texi" "texinfo" "dtx"))
+
+    ;; Font-lock for AuCTeX
+    ;; Note: '«' and '»' is by pressing 'C-x 8 <' and 'C-x 8 >', respectively
+    (font-lock-add-keywords 'latex-mode (list (list "\\(«\\(.+?\\|\n\\)\\)\\(+?\\)\\(»\\)" '(1 'font-latex-string-face t) '(2 'font-latex-string-face t) '(3 'font-latex-string-face t))))
+    ;; Add standard Sweave file extensions to the list of files recognized  by AuCTeX.
+    (add-hook 'TeX-mode-hook (lambda () (reftex-isearch-minor-mode)))
+    )
+
 (use-package eldoc
   :diminish eldoc-mode)
 
@@ -398,27 +451,34 @@
   :ensure t)
 
 (use-package company-c-headers
-    :defer nil
-    :ensure t)
+       :defer nil
+       :ensure t)
 
-  (use-package company-irony
-    :defer nil
-    :ensure t
-    :config
-    (setq company-backends '((company-c-headers
-                              company-dabbrev-code
-                              company-irony))))
-  (use-package irony
-    :defer nil
-    :ensure t
-    :config
-    :hook
-    ((c++-mode c-mode) . irony-mode)
-    ('irony-mode-hook) . 'irony-cdb-autosetup-compile-options)
+     (use-package company-irony
+       :defer nil
+       :ensure t
+       :config
+       (setq company-backends '((company-c-headers
+                                 company-dabbrev-code
+                                 company-irony))))
+     (use-package irony
+       :defer nil
+       :ensure t
+       :config
+       :hook
+       ((c++-mode c-mode) . irony-mode)
+       ('irony-mode-hook) . 'irony-cdb-autosetup-compile-options)
 
-;; Binds C-c C-l to compile in C-mode
-    (add-hook 'c-mode-common-hook 
-          (lambda () (define-key c-mode-base-map (kbd "C-c C-l") 'compile)))
+   ;; Binds C-c C-l to compile in C-mode
+       (add-hook 'c-mode-common-hook 
+             (lambda () (define-key c-mode-base-map (kbd "C-c C-l") 'compile)))
+
+;; Binds super right to end of line and super left to beginning of line.
+       (add-hook 'c-mode-common-hook 
+             (lambda () (define-key c-mode-base-map (kbd "<s-right>") 'move-end-of-line)))
+
+  (add-hook 'c-mode-common-hook 
+             (lambda () (define-key c-mode-base-map (kbd "<s-left>") 'move-beginning-of-line)))
 
 (use-package meghanada
   :ensure t
@@ -429,3 +489,32 @@
               (meghanada-mode t)))
   (setq meghanada-java-path "java")
   (setq meghanada-maven-path "mvn"))
+
+(add-to-list 'load-path "~/.emacs.d/web/")
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+
+(unless (package-installed-p 'clojure-mode)
+  (package-install 'clojure-mode))
+
+(setq load-path (cons  "/usr/lib/erlang/lib/tools-3.5.2/emacs"
+      load-path))
+      (setq erlang-root-dir "/usr/lib/erlang")
+      (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
+(require 'erlang-start)
+
+
+ ;; Binds C-c C-e to open erlang interpreter in erlang-mode
+     (add-hook 'erlang-mode-hook 
+           (lambda () (define-key erlang-mode-base-map (kbd "C-c C-e") 'run-erlang)))
+
+(add-to-list 'load-path "~/.emacs.d/go-mode.el/")
+(autoload 'go-mode "go-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
