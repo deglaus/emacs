@@ -504,17 +504,3 @@
 (unless (package-installed-p 'clojure-mode)
   (package-install 'clojure-mode))
 
-(setq load-path (cons  "/usr/lib/erlang/lib/tools-3.5.2/emacs"
-      load-path))
-      (setq erlang-root-dir "/usr/lib/erlang")
-      (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-(require 'erlang-start)
-
-
- ;; Binds C-c C-e to open erlang interpreter in erlang-mode
-     (add-hook 'erlang-mode-hook 
-           (lambda () (define-key erlang-mode-base-map (kbd "C-c C-e") 'run-erlang)))
-
-(add-to-list 'load-path "~/.emacs.d/go-mode.el/")
-(autoload 'go-mode "go-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
