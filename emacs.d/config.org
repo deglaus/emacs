@@ -738,12 +738,3 @@ TODO: add
 (unless (package-installed-p 'clojure-mode)
   (package-install 'clojure-mode))
 #+END_SRC
-** Go
-*** Description
-Go is a language developed by Google.
-*** Code
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/go-mode.el/")
-(autoload 'go-mode "go-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
-#+END_SRC
