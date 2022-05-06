@@ -54,9 +54,10 @@ Emacs breaks certain modes when it has line-numbers-mode enabled, (like docview 
 #+END_SRC
 ** Disable most gui elements
 #+BEGIN_SRC emacs-lisp
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
+  ;; currently enabled! uncomment to disable again.
+  ;; (tool-bar-mode -1)
+  ;; (menu-bar-mode -1)
+  ;; (scroll-bar-mode -1)
 #+END_SRC
 ** Enable copypasting outside of Emacs
 #+BEGIN_SRC emacs-lisp
