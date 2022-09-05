@@ -2,7 +2,7 @@
 #+TITLE: GNUMACS
 #+LANGUAGE: en
 #+OPTIONS: num:nil
-The Emacs distribution
+Storstrogarn's GNUMACS: The Emacs distribution
 
 [[./gnu.png]]
 * Introduction
@@ -11,7 +11,7 @@ Storstrogarn's personal emacs configuration. ``init.el`` will read config.org; a
 #+BEGIN_QUOTE
 What's the difference between a villain and a super villain? Presentation!
 #+END_QUOTE
-It is a very basic config which means you can easily add, edit or remove things as you like. You can use this as a building block when making your OWN Emacs config!
+It is a very basic config which means you can easily add, edit or remove things as you like. You can use this as a building block when making your OWN Emacs config! This config was based on [[https://github.com/snackon/Witchmacs][this repo by Snackon]]. 
 * Quick install
 Original:
 #+BEGIN_SRC 
@@ -31,11 +31,9 @@ Also, to get autocompletion on C, C++ and Java files, you'll need to install the
 
 (optional) =mvn= maven for java project handling through =meghanada=
 * Things-to-do
- + Make dashboard EVEN cooler!
+ + Add support for multiple cursors
  + Maybe add random dashboard pictures
- + Adjust custom Witchmacs theme
- + Clean up/organize config.org
- - Optimize startup time
+ - Learn evil mode
 * QoL section
 Minor quality-of-life modifications for a more pleasant Emacs experience
 ** Enable line numbers
@@ -144,6 +142,11 @@ Super - Control - <arrow>
 #+BEGIN_SRC emacs-lisp
  (global-set-key (kbd "C-s") 'isearch-forward)
  (define-key isearch-mode-map "\C-s" 'isearch-repeat-forward)
+#+END_SRC
+** Comment and uncomment
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c r") 'comment-region)
+  (global-set-key (kbd "C-c u") 'uncomment-region)
 #+END_SRC
 * =Org= mode
 ** Description
@@ -316,8 +319,8 @@ The frontend of Witchmacs; without this there'd be no Marisa in your Emacs start
     :config
     (dashboard-setup-startup-hook)
     (setq dashboard-items '((recents . 5)))
-    (setq dashboard-banner-logo-title "WITCHMACS - A GNU/Emacs distribution!")
-    (setq dashboard-startup-banner "~/.emacs.d/gnu2.png")
+    (setq dashboard-banner-logo-title "E M A C S")
+    (setq dashboard-startup-banner "~/.emacs.d/yuidash.png")
     (setq dashboard-center-content t)
     (setq dashboard-show-shortcuts nil)
     (setq dashboard-set-init-info t)
@@ -729,7 +732,6 @@ Web-mode is an autonomous emacs major-mode for editing web templates.
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
 #+END_SRC
-
 
 ** Clojure
 *** Description
