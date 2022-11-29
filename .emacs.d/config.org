@@ -658,7 +658,7 @@ Yasnippet provides useful snippets, nothing to do with Company but still useful 
     :ensure t
     :diminish yas-minor-mode
     :hook
-    ((c-mode c++-mode) . yas-minor-mode)
+    ((c-mode c++-mode latex-mode) . yas-minor-mode)
     :config
     (yas-reload-all))
 
