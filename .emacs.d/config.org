@@ -1,17 +1,17 @@
 #+STARTUP: overview
-#+TITLE: GNUMACS
+#+TITLE: dEMACS
 #+LANGUAGE: en
 #+OPTIONS: num:nil
-Storstrogarn's GNUMACS: The Emacs distribution
+deglaus' dEMACS: The Emacs distribution
 
 [[./gnu.png]]
 * Introduction
-Storstrogarn's personal emacs configuration. ``init.el`` will read config.org; a lot of the configurations will be here, neatly organized.
+deglaus' personal emacs configuration. ``init.el`` will read /config.org/; a lot of the configurations will be here, neatly organized.
 * Why would I use this?
 #+BEGIN_QUOTE
 What's the difference between a villain and a super villain? Presentation!
 #+END_QUOTE
-It is a very basic config which means you can easily add, edit or remove things as you like. You can use this as a building block when making your OWN Emacs config! This config was based on [[https://github.com/snackon/Witchmacs][this repo by Snackon]]. 
+It is a very basic config which means you can easily add, edit or remove things as you like. You can use this as a building block when making your OWN Emacs config! This config and text are based on [[https://github.com/snackon/Witchmacs][this repo by Snackon]]. 
 * Quick install
 Original:
 #+BEGIN_SRC 
@@ -19,7 +19,8 @@ git clone https://github.com/snackon/Witchmacs ~/.emacs.d
 #+END_SRC
 This one:
 #+BEGIN_SRC 
-git clone https://github.com/storstrogarn/emacs ~/.emacs.d
+git clone https://github.com/storstrogarn/emacs 
+mv ./emacs/.emacs.d ~/.emacs.d
 #+END_SRC
 After running this command, the first time you run Emacs will download all of the specified packages in the config.org file, so please be patient!
 
@@ -628,6 +629,13 @@ Latex allows for creating neat text documents.
 #+BEGIN_SRC emacs-lisp
   (use-package abbrev
     :diminish abbrev-mode)
+#+END_SRC
+** Initialize =markdown=
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
 #+END_SRC
 * Programming section
 ** Initialize =company=
