@@ -1,0 +1,65 @@
+# -*- mode: snippet -*-
+# contributor: deglaus
+# key: newdoc
+# name: new document
+# --
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{chngpage}
+\usepackage{listings}
+\usepackage{float}
+
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{positioning}
+\usetikzlibrary{automata, positioning, arrows}
+\usepackage[left=2cm,right=2cm]{geometry}
+\usepackage{csquotes}
+
+
+
+% Get month and year using \monthyeardate\today
+\usepackage{datetime}
+\newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
+
+\title{}
+\author{Johan Söderström \\ }
+\date{\monthyeardate\today}
+
+% REMOVES INDENTATION FOR A NEW PARAGRAPH
+\setlength{\parindent}{0cm}
+
+% Force figures to be in a place
+\usepackage[section]{placeins}
+
+% PREVENTS WORDS CUTTING OFF AT THE END OF THE LINES
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+% REFERENCE STYLE
+\bibliographystyle{IEEEtran}
+% Set language to British English
+\usepackage[british]{babel}
+
+\begin{document}
+
+
+\maketitle
+\tableofcontents
+
+$0
+
+% References (assumed to be in sources.bib)
+\newpage
+\begin{flushleft}
+\bibliographystyle{ieeetr}
+\bibliography{sources}
+\end{flushleft}
+
+\end{document}
