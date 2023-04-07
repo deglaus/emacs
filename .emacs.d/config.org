@@ -149,6 +149,58 @@ Super - Control - <arrow>
   (global-set-key (kbd "C-c r") 'comment-region)
   (global-set-key (kbd "C-c u") 'uncomment-region)
 #+END_SRC
+** LaTeX spell-check using /flycheck/
+
+
+
+#+BEGIN_SRC emacs-lisp
+
+
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+;; (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+
+(add-hook 'LaTeX-mode-hook
+      (defun my-LaTeX-mode-hook-100 ()
+        (flycheck-mode 1)
+        (flycheck-select-checker 'tex-lacheck)))
+#+END_SRC
+
+#+BEGIN_SRC markdown
+
+
+
+
+
+(flycheck-define-checker tex-textidote
+  "A LaTeX grammar/spelling checker using textidote.
+
+  See https://github.com/sylvainhalle/textidote"
+  :modes (latex-mode plain-tex-mode)
+  :command ("java" "-jar" (eval (expand-file-name "/opt/textidote/textidote.jar"))
+            "--read-all"
+            "--output" "singleline"
+            "--no-color"
+            "--check"   (eval (if ispell-current-dictionary (substring ispell-current-dictionary 0 2) "en"))
+            ;; Try to honor local aspell dictionary and replacements if they exist
+            "--dict"    (eval (expand-file-name "~/.aspell.en.pws"))
+            "--replace" (eval (expand-file-name "~/.aspell.en.prepl"))
+            ;; Using source ensures that a single temporary file in a different dir is created
+            ;; such that textidote won't process other files. This serves as a hacky workaround for
+            ;; https://github.com/sylvainhalle/textidote/issues/200.
+            source)
+  :error-patterns ((warning line-start (file-name)
+                            "(L" line "C" column "-" (or (seq "L" end-line "C" end-column) "?") "): "
+                            (message (one-or-more (not "\""))) (one-or-more not-newline) line-end)))
+(add-to-list 'flycheck-checkers 'tex-textidote)
+#+END_SRC
 * =Org= mode
 ** Description
 One of the main selling points of Emacs! no Emacs distribution is complete without sensible and well-defined org-mode defaults
