@@ -37,6 +37,10 @@ Also, to get autocompletion on C, C++ and Java files, you'll need to install the
  - Learn evil mode
 * QoL section
 Minor quality-of-life modifications for a more pleasant Emacs experience
+** Font size
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil :height 120)
+#+END_SRC
 ** Enable line numbers
 Emacs breaks certain modes when it has line-numbers-mode enabled, (like docview or ansi-term) so I utilize the approach of only enabling it on some major modes rather than globally
 #+BEGIN_SRC emacs-lisp
