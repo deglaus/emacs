@@ -1,12 +1,13 @@
 # -*- mode: snippet -*-
-# contributor : Mads D. Kristensen <madsdk@gmail.com>
+# contributor : Mads D. Kristensen <madsdk@gmail.com> & deglaus
 # key : fig
 # group: environments
 # name : \begin{figure} ... \end{figure}
 # --
-\begin{figure}[htbp]
+\begin{figure}[H]
+	\footnotesize
   \centering
   $0
-  \caption{${1:caption}}
-  \label{${2:"waiting for reftex-label call..."$(unless yas/modified-p (reftex-label nil 'dont-insert))}}
+  \caption{\footnotesize ${1:caption}}
+  \label{}
 \end{figure}
