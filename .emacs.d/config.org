@@ -641,6 +641,12 @@ Latex allows for creating neat text documents.
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 #+END_SRC
+** Initialize minizinc
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/minizinc-mode/")
+(require 'minizinc-mode)
+(add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode))
+#+END_SRC
 * Programming section
 ** Initialize =company=
 *** Description
