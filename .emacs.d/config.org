@@ -759,3 +759,9 @@ TODO: add
 (unless (package-installed-p 'clojure-mode)
   (package-install 'clojure-mode))
 #+END_SRC
+** Ada
+*** Code
+#+BEGIN_SRC emacs-lisp
+(unless (package-installed-p 'ada-mode)
+  (package-install 'ada-mode))
+#+END_SRC
