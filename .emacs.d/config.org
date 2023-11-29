@@ -647,6 +647,12 @@ Latex allows for creating neat text documents.
 (require 'minizinc-mode)
 (add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode))
 #+END_SRC
+** Intialize fpscalc
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/fpscalc/")
+(require 'fpscalc)
+(add-to-list 'auto-mode-alist '("\\.fps\\'" . fpscalc-mode))
+#+END_SRC
 * Programming section
 ** Initialize =company=
 *** Description
@@ -765,3 +771,4 @@ TODO: add
 (unless (package-installed-p 'ada-mode)
   (package-install 'ada-mode))
 #+END_SRC
+** Fpscalc
