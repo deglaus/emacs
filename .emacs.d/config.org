@@ -778,3 +778,19 @@ TODO: add
   (package-install 'lua-mode))
 #+END_SRC
 
+* Social section
+** Telegram
+*** Code
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-pinned-packages '(telega . "melpa-stable"))
+
+(use-package telega
+  :load-path  "~/telega.el"
+  :commands (telega)
+  :defer t)
+
+;; (setq telega-use-docker t)
+#+END_SRC
+
